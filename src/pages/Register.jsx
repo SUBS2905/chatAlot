@@ -15,7 +15,7 @@ const Register = () => {
                 <label htmlFor='file'><img src={Add} alt='' /> <span>Add an Avatar</span></label>
                 <button>Sign up</button>
             </form>
-            <p>Already have an account? </p>
+            <p>Already have an account? Sign in</p>
         </div>
     </div>
   )
