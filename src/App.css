@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
 }
+
+/* Register & Login page */
 .formContainer{
   background-image: url(assets/form-container-bg.jpg);
   background-size: cover;
@@ -34,6 +36,9 @@
   gap: 15px;
   min-width: 280px;
 }
+.formWrapper>p{
+  font-size: 0.8rem;
+}
 ::placeholder{
   color: #372e63;
 }
@@ -51,6 +56,12 @@
   border-radius: 3px;
   cursor: pointer;
 }
-.formWrapper>p{
+.formWrapper>form>label{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #372e63;
   font-size: 0.8rem;
+  cursor: pointer;
 }
