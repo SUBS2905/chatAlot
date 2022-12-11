@@ -5,7 +5,7 @@
 
 /* Register & Login page */
 .formContainer{
-  background-image: url(assets/form-container-bg.jpg);
+  background-image: url(assets/container-bg.jpg);
   background-size: cover;
   height: 100vh;
   display: flex;
@@ -64,4 +64,57 @@
   color: #372e63;
   font-size: 0.8rem;
   cursor: pointer;
+}
+
+/* Home page */
+.home{
+  background-image: url(assets/container-bg.jpg);
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home>.container{
+  border-radius: 3%;
+  overflow: hidden;
+  color: white;
+  width: 60%;
+  height: 70%;
+  display: flex;
+}
+.sidebar{
+  flex: 1;
+  background-color: #34084e;
+}
+.sidebar>.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5%;
+  background-color: #230535;
+}
+.sidebar>.navbar>.logo{
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: whitesmoke;
+}
+.sidebar>.navbar>.user{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user>img{
+  background-color: #fff;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user>label{
+  cursor: pointer;
+}
+.chat{
+  flex: 2;
+  background-color: #14031e;
 }
