@@ -83,6 +83,9 @@
   height: 70%;
   display: flex;
 }
+
+
+/* SideBar */
 .sidebar{
   flex: 1;
   background-color: #34084e;
@@ -91,8 +94,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5%;
-  background-color: #230535;
+  padding: 12px;
+  background-color: #510e79;
 }
 .sidebar>.navbar>.logo{
   font-weight: bold;
@@ -153,7 +156,22 @@
   font-size: 0.7rem;
   color: lightgray;
 }
+
+
+/* Chat Area */
 .chat{
   flex: 2;
   background-color: #14031e;
+}
+.chat>.chatInfo{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px;
+  background-color: #230535;
+}
+.chatIcons{
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
 }
