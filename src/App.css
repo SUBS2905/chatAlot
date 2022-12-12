@@ -114,6 +114,45 @@
 .user>label{
   cursor: pointer;
 }
+.search{
+  border-bottom: 1px solid #14031e;
+}
+.searchForm{
+  padding: 10px;
+}
+.searchForm>input{
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #fff;
+}
+.searchForm>input::placeholder{
+  color: rgb(176, 175, 175);
+}
+.userChat{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+.userChat:hover{
+  background-color: #230535;
+}
+.userChat>img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.userChatInfo>span{
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.userChatInfo>p{
+  font-size: 0.7rem;
+  color: lightgray;
+}
 .chat{
   flex: 2;
   background-color: #14031e;
