@@ -161,17 +161,55 @@
 /* Chat Area */
 .chat{
   flex: 2;
-  background-color: #14031e;
 }
 .chat>.chatInfo{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px;
+  height: 50px;
+  padding: 5px;
   background-color: #230535;
 }
 .chatIcons{
   display: flex;
   gap: 10px;
+  cursor: pointer;
+}
+.messages{
+  background-color: #14031e;
+  padding: 10px;
+  height: calc(100% - 140px);
+}
+.input{
+  background-color: #35263d;
+  height: 50px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.input>input{
+  border: none;
+  outline: none;
+  width: 100%;
+  background: transparent;
+  color: #fff;
+}
+.input>input::placeholder{
+  color: rgb(176, 175, 175);
+}
+.inputIcons{
+  display: flex;
+  gap: 10px;
+}
+.inputIcons>button{
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+.inputIcons, .inputIcons>label, .inputIcons>button{
   cursor: pointer;
 }
