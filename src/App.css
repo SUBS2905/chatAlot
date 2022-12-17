@@ -89,6 +89,7 @@
 .sidebar{
   flex: 1;
   background-color: #34084e;
+  position: relative;
 }
 .sidebar>.navbar{
   display: flex;
@@ -261,4 +262,26 @@
 }
 .inputIcons, .inputIcons>label, .inputIcons>button{
   cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+  
+}
+@media screen and (max-width: 768px) {
+  .home>.container{
+    width: 90%;
+  }
+  .user>label, .user>label>img{
+    position: absolute;
+    bottom: 10px;
+    
+  }
+}
+@media screen and (max-width: 1200px) {
+  .sidebar>.navbar>.logo{
+    display: none;
+  }
+  .user>label, .user>label>img{
+    margin-left: 30%;
+  }
 }
