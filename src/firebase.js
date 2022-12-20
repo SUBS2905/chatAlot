@@ -1,15 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-const dotenv = require('dotenv');
-dotenv.config({path:'./config.env'});
+
 
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID
+  apiKey: "AIzaSyAxCLewzeCkh5w0PcnZOzLQ9oUn2QgZPJA",
+  authDomain: "chat-a-lot-1d327.firebaseapp.com",
+  projectId: "chat-a-lot-1d327",
+  storageBucket: "chat-a-lot-1d327.appspot.com",
+  messagingSenderId: "424172109336",
+  appId: "1:424172109336:web:bc7410120a29bc9db90d6d"
 };
 
 
