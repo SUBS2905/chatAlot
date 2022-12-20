@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Add from "../assets/user-add.png";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { auth, storage } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, storage, db } from "../firebase";
 
 const Register = () => {
   const [err, setErr] = useState(false);
@@ -16,6 +17,31 @@ const Register = () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
+      const storageRef = ref(storage, displayName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        (error) => {
+          setErr(true);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            await updateProfile(res.user, {
+              displayName,
+              photoURL: downloadURL
+            });
+
+            await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              displayName,
+              email,
+              photoURL: downloadURL
+            });
+          });
+          
+          
+        }
+      );
     } catch {
       setErr(true);
     }
