@@ -2,6 +2,13 @@
   margin: 0;
   padding: 0;
 }
+:root{
+  --transparentWhite: rgba(255,255,255,0.8);
+  --deepBlue: #25185d;
+  --deepBlue2: #372e63;
+  --gray: gray;
+
+}
 
 /* Register & Login page */
 .formContainer{
@@ -12,8 +19,9 @@
   align-items: center;
   justify-content: center;
 }
+
 .formWrapper{
-  background-color: #e473ef;
+  background-color: var(--transparentWhite);
   border-radius: 3%;
   padding: 20px 30px;
   display: flex;
@@ -22,12 +30,12 @@
   gap: 10px;
 }
 .formWrapper .logo{
-  color: #25185d;
+  color: var(--deepBlue);
   font-weight: bold;
   font-size: 1.5rem;
 }
 .formWrapper .title{
-  color: #25185d;
+  color: var(--deepBlue);
   font-weight: bold;
 }
 .formWrapper form{
@@ -40,19 +48,20 @@
   font-size: 0.8rem;
 }
 ::placeholder{
-  color: #372e63;
+  color: var(--gray);
 }
 .formWrapper>form>input{
   padding: 15px;
   border: none;
-  background-color: #e473ef;
-  border-bottom: 1px solid #25185d;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--gray);
 }
 .formWrapper>form>button{
   padding: 10px;
   border: none;
   color: white;
-  background-color: #372e63;
+  background-color: var(--deepBlue2);
   border-radius: 3px;
   cursor: pointer;
 }
@@ -61,7 +70,6 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  color: #372e63;
   font-size: 0.8rem;
   cursor: pointer;
 }
