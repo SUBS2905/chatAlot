@@ -184,7 +184,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
+  height: 46px;
   padding: 5px;
   border-left: 1.5px solid var(--solidGray);
   background-color: var(--navbarGray);
@@ -249,21 +249,26 @@
 }
 
 .input{
-  background-color: var(--transparentGray);
+  background-color: var(--solidGray);
   height: 50px;
-  padding: 5px;
+  padding: 10px 10px 5px 10px;
+}
+.inputWrapper{
+  background-color: var(--transparentGray);
+  border-radius: 4px;
+  padding: 4px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.input>input{
+.inputWrapper>input{
   border: none;
   outline: none;
   width: 100%;
   color: var(--White);
   background: transparent;
 }
-.input>input::placeholder{
+.inputWrapper>input::placeholder{
   color: var(--lightGray);
 }
 .inputIcons{
@@ -289,17 +294,16 @@
   .home>.container{
     width: 90%;
   }
-  .user>label, .user>label>img{
+  .user>button{
     position: absolute;
-    bottom: 10px;
-    
+    bottom: 20px;
   }
 }
 @media screen and (max-width: 1200px) {
   .sidebar>.navbar>.logo{
     display: none;
   }
-  .user>label, .user>label>img{
+  .user>button{
     margin-left: 30%;
   }
 }
