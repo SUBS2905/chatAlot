@@ -1,7 +1,7 @@
 import React from 'react'
 import VideocamIcon from '@mui/icons-material/Videocam';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Messages from './Messages';
 import Input from './Input'
 
@@ -13,7 +13,7 @@ const Chat = () => {
         <div className='chatIcons'>
           <VideocamIcon />
           <PersonAddIcon />
-          <MoreHorizIcon />
+          <button id='logout'><LogoutIcon style={{color:'white'}} /></button>
         </div>
       </div>
       <Messages />

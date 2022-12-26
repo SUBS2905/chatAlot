@@ -2,7 +2,7 @@ import React from "react";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import SendIcon from "@mui/icons-material/Send";
-import { grey } from "@mui/material/colors";
+import { blue, grey } from "@mui/material/colors";
 
 const Input = () => {
   return (
@@ -16,7 +16,7 @@ const Input = () => {
             <AddPhotoAlternateIcon style={{color: grey[300]}} />
           </label>
           <button>
-            <SendIcon style={{color: grey[300]}} />
+            <SendIcon style={{color: blue[600]}} />
           </button>
         </div>
       </div>

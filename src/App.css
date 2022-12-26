@@ -3,6 +3,7 @@
   padding: 0;
 }
 :root{
+  --transparentWhite: rgba(255, 255, 255, 0.7);
   --transparentBlack: rgba(0, 0, 0, 0.5);
   --transparentGray: rgba(128,128,128,0.3);
   --navbarGray: #202225;
@@ -12,6 +13,7 @@
   --White: white;
   --deepBlue: #25185d;
   --deepBlue2: #372e63;
+  --sentMessage: #0072ff;
 }
 
 /* Register & Login page */
@@ -24,7 +26,7 @@
   justify-content: center;
 }
 .formWrapper{
-  background-color: var(--solidGray);
+  background-color: var(--transparentWhite);
   border-radius: 3%;
   padding: 20px 30px;
   display: flex;
@@ -79,7 +81,7 @@
 
 /* Home page */
 .home{
-  background-image: url(assets/bg.jpg);
+  background-image: url(assets/container-bg.jpg);
   background-size: cover;
   height: 100vh;
   display: flex;
@@ -108,7 +110,6 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px;
-  border-right: 1.5px solid var(--solidGray);
   background-color: var(--navbarGray);
 }
 .sidebar>.navbar>.logo{
@@ -127,12 +128,6 @@
   width: 32px;
   border-radius: 50%;
   object-fit: cover;
-}
-.user>button{
-  background-color: var(--navbarGray);
-  border: none;
-  outline: none;
-  cursor: pointer;
 }
 .search{
   border-bottom: 1px solid var(--Gray);
@@ -186,7 +181,7 @@
   justify-content: space-between;
   height: 46px;
   padding: 5px;
-  border-left: 1.5px solid var(--solidGray);
+  border-left: 1px solid var(--solidGray);
   background-color: var(--navbarGray);
 }
 .chatIcons{
@@ -194,7 +189,12 @@
   gap: 10px;
   cursor: pointer;
 }
-
+.chatIcons>button{
+  background-color: var(--navbarGray);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 .messages{
   background-color: var(--solidGray);
   padding: 10px;
@@ -218,6 +218,7 @@
 .messageInfo>img{
   width: 30px;
   height: 30px;
+  background-color: var(--White);
   border-radius: 50%;
   object-fit: cover;
 }
@@ -228,8 +229,9 @@
   gap: 10px;
 }
 .messageContent>p{
-  background-color: #7715b0;
-  padding: 5px;
+  background-color: var(--navbarGray);
+  font-size: 0.8rem;
+  padding: 8px;
   border-radius: 0 10px 10px 10px;
   max-width: max-content;
 }
@@ -244,7 +246,7 @@
   align-items: flex-end;
 }
 .message.sender>.messageContent>p{
-    background-color: #b053b8;
+    background-color: var(--sentMessage);
     border-radius: 10px 0 10px 10px;
 }
 
@@ -292,11 +294,14 @@
 }
 @media screen and (max-width: 768px) {
   .home>.container{
-    width: 90%;
+    height: 100vh;
+    width: 100vw;
+    border-radius: 0;
   }
   .user>button{
     position: absolute;
     bottom: 20px;
+    background-color: transparent;
   }
 }
 @media screen and (max-width: 1200px) {
