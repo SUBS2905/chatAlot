@@ -4,6 +4,8 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Messages from './Messages';
 import Input from './Input'
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const Chat = () => {
   return (
@@ -13,7 +15,7 @@ const Chat = () => {
         <div className='chatIcons'>
           <VideocamIcon />
           <PersonAddIcon />
-          <button id='logout'><LogoutIcon style={{color:'white'}} /></button>
+          <button id='logout' onClick={()=>signOut(auth)}><LogoutIcon style={{color:'white'}} /></button>
         </div>
       </div>
       <Messages />
