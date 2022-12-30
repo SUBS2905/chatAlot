@@ -1,5 +1,4 @@
 import React from "react";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import SendIcon from "@mui/icons-material/Send";
@@ -12,10 +11,10 @@ const Input = () => {
         <input type="text" placeholder="Write your message..." />
         <div className="inputIcons">
           <AddCircleIcon style={{color: grey[300]}} />
-          <input type="file" id="addpic" style={{ display: "none" }} />
+          <AddPhotoAlternateIcon style={{color: grey[300]}} />
+          {/* <input type="file" id="addpic" style={{ display: "none" }} />
           <label htmlFor="addpic">
-            <AddPhotoAlternateIcon style={{color: grey[300]}} />
-          </label>
+          </label> */}
           <button>
             <SendIcon style={{color: blue[600]}} />
           </button>

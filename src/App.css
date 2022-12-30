@@ -278,14 +278,12 @@
   gap: 10px;
 }
 .inputIcons>button{
-  width: 32px;
-  height: 32px;
   border-radius: 100%;
   border: none;
   outline: none;
   background-color: transparent;
 }
-.inputIcons, .inputIcons>label, .inputIcons>button{
+.inputIcons, .inputIcons>button{
   cursor: pointer;
 }
 
