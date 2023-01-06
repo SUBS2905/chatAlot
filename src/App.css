@@ -1,6 +1,7 @@
 *{
   margin: 0;
   padding: 0;
+  font-family: 'Roboto', sans-serif;
 }
 :root{
   --transparentWhite: rgba(255, 255, 255, 0.7);
