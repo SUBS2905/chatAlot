@@ -10,7 +10,6 @@ const Register = () => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const displayName = e.target[0].value;
@@ -19,38 +18,32 @@ const Register = () => {
     const file = e.target[3].files[0];
 
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const { user } = await createUserWithEmailAndPassword(auth, email, password);
 
       const storageRef = ref(storage, displayName);
+      // console.log(storageRef);
       const uploadTask = uploadBytesResumable(storageRef, file);
+      // console.log(uploadTask);
 
-      uploadTask.on(
-        (error) => {
-          setErr(true);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateProfile(res.user, {
-              displayName,
-              photoURL: downloadURL
-            });
+      const uploadSnapshot = await uploadTask;
+      const downloadURL = await getDownloadURL(uploadSnapshot.ref);
 
-            await setDoc(doc(db, "users", res.user.uid), {
-              uid: res.user.uid,
-              displayName,
-              email,
-              photoURL: downloadURL
-            });
-            //Document containing the user's chats
-            await setDoc(doc(db, "userChats", res.user.uid), {});
-            navigate("/");
+      await updateProfile(user, {
+        displayName,
+        photoURL: downloadURL,
+      });
 
-          });
-          
-          
-        }
-      );
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        displayName,
+        email,
+        photoURL: downloadURL,
+      });
+
+      await setDoc(doc(db, "userChats", user.uid), {});
+      navigate("/");
     } catch {
+      // console.log(err);
       setErr(true);
     }
   };
@@ -71,7 +64,9 @@ const Register = () => {
           <button>Sign up</button>
           {err ? <span>Something went wrong!</span> : null}
         </form>
-        <p>Already have an account? <Link to="/login">Sign in</Link></p>
+        <p>
+          Already have an account? <Link to="/login">Sign in</Link>
+        </p>
       </div>
     </div>
   );
