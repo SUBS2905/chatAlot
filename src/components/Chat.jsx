@@ -15,7 +15,7 @@ const Chat = () => {
         <div className='chatIcons'>
           <VideocamIcon />
           <PersonAddIcon />
-          <button id='logout' onClick={()=>signOut(auth)}><LogoutIcon style={{color:'white'}} /></button>
+          <button id='logout' onClick={()=>signOut(auth)}><LogoutIcon style={{color:'red'}} /></button>
         </div>
       </div>
       <Messages />
