@@ -1,11 +1,24 @@
-import React, { useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import React, { useContext, useState } from "react";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { db } from "../firebase";
+import { AuthContext } from "../context/AuthContext";
 
 const Search = () => {
   const [userName, setUserName] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(false);
+
+  const { currentUser } = useContext(AuthContext);
 
   const handleSearch = async () => {
     const qry = query(
@@ -26,6 +39,50 @@ const Search = () => {
     key.code === "Enter" && handleSearch();
   };
 
+  const handleSelect = async () => {
+    //in case of a new chat
+    const combinedId =
+      currentUser.uid > user.uid
+        ? currentUser.uid + user.uid
+        : user.uid + currentUser.uid;
+
+    try {
+      //Look in the chats collection for the combined id
+      const res = await getDoc(doc(db, "chats", combinedId));
+
+      //if the chat document is not present create one inside chats collection
+      if (!res.exists()) {
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
+
+        //update both users' userChats data
+        await updateDoc(doc(db, "userChats", currentUser.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: user.uid,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+
+        await updateDoc(doc(db, "userChats", user.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: currentUser.uid,
+            displayName: currentUser.displayName,
+            photoURL: currentUser.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      setErr(err);
+    }
+
+    //Reset the search
+    setUser(null);
+    setUserName("");
+  };
+
   return (
     <div className="search">
       <div className="searchForm">
@@ -34,11 +91,12 @@ const Search = () => {
           placeholder="Search user"
           onKeyDown={handleKey}
           onChange={(e) => setUserName(e.target.value)}
+          value={userName}
         />
       </div>
       {err && <span>User not found!</span>}
       {user && (
-        <div className="userChat">
+        <div className="userChat" onClick={handleSelect}>
           <img src={user.photoURL} alt="" />
           <div className="userChatInfo">
             <span>{user.displayName}</span>
