@@ -284,7 +284,7 @@
   outline: none;
   background-color: transparent;
 }
-.inputIcons, .inputIcons>button{
+.inputIcons, .inputIcons>button, .inputIcons>label{
   cursor: pointer;
 }
 
