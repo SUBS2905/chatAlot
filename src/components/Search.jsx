@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, updateDoc, where} from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
 
 const Search = () => {
   const [userName, setUserName] = useState("");
@@ -9,6 +10,7 @@ const Search = () => {
   const [err, setErr] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
+  const {dispatch} = useContext(ChatContext);
 
   const handleSearch = async () => {
     const qry = query(
@@ -71,6 +73,8 @@ const Search = () => {
     //Reset the search
     setUser(null);
     setUserName("");
+
+    dispatch({type: "CHANGE_USER", payload: user});
   };
 
   return (
