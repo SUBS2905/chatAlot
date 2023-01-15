@@ -287,6 +287,11 @@
 .inputIcons, .inputIcons>button, .inputIcons>label{
   cursor: pointer;
 }
+.emoji-picker{
+  position: absolute;
+  bottom: 100px;
+  right: 250px;
+}
 
 @media screen and (max-width: 480px) {
   

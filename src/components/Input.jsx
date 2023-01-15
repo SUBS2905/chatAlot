@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import SendIcon from "@mui/icons-material/Send";
+import AddReactionIcon from "@mui/icons-material/AddReaction";
+import Picker from "@emoji-mart/react";
+import dt from "@emoji-mart/data";
 import { blue, grey } from "@mui/material/colors";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
@@ -19,14 +21,17 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 const Input = () => {
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
+  const [isPickerVisible, setPickerVisible] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
-  const handleKeyDown = (e) =>{
-    if(e.key === "Enter")
-      handleSend();
-  }
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleSend();
+  };
+  const handleEmoji = (e) => {
+    setText(text + e.native);
+  };
 
   const handleSend = async () => {
     if (img) {
@@ -89,7 +94,18 @@ const Input = () => {
           onChange={(e) => setImg(e.target.files[0])}
         />
         <div className="inputIcons">
-          <AddCircleIcon style={{ color: grey[300] }} />
+          <button onClick={() => setPickerVisible(!isPickerVisible)}>
+            <AddReactionIcon style={{ color: grey[300] }} />
+          </button>
+          {isPickerVisible && (
+            <div className="emoji-picker">
+              <Picker
+                data={dt}
+                previewPosition="none"
+                onEmojiSelect={handleEmoji}
+              />
+            </div>
+          )}
           <label htmlFor="img-upload" className="img-upload-input">
             <AddPhotoAlternateIcon style={{ color: grey[300] }} />
           </label>
