@@ -23,6 +23,11 @@ const Input = () => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
+  const handleKeyDown = (e) =>{
+    if(e.key === "Enter")
+      handleSend();
+  }
+
   const handleSend = async () => {
     if (img) {
       const storageRef = ref(storage, uuid());
@@ -74,6 +79,7 @@ const Input = () => {
           type="text"
           placeholder="Write your message..."
           onChange={(e) => setText(e.target.value)}
+          onKeyDown={handleKeyDown}
           value={text}
         />
         <input
