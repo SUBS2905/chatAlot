@@ -79,6 +79,11 @@
   font-size: 0.8rem;
   cursor: pointer;
 }
+.error-msg{
+  text-align: center;
+  color: red;
+  font-size: 0.9rem;
+}
 
 /* Home page */
 .home{

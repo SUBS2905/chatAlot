@@ -29,8 +29,9 @@ const Login = () => {
           <input type="email" placeholder="email" />
           <input type="password" placeholder="password" />
           <button>Sign In</button>
-          {err ? <span>Something went wrong!</span> : null}
         </form>
+        {err && <span className="error-msg">Something went wrong!</span>}
+        <p><Link to="/forgotPassword">Forgot Password</Link></p>
         <p>Don't have an account? <Link to="/register">Register</Link></p>
       </div>
     </div>

@@ -21,9 +21,7 @@ const Register = () => {
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
 
       const storageRef = ref(storage, displayName);
-      // console.log(storageRef);
       const uploadTask = uploadBytesResumable(storageRef, file);
-      // console.log(uploadTask);
 
       const uploadSnapshot = await uploadTask;
       const downloadURL = await getDownloadURL(uploadSnapshot.ref);
@@ -43,7 +41,6 @@ const Register = () => {
       await setDoc(doc(db, "userChats", user.uid), {});
       navigate("/");
     } catch {
-      // console.log(err);
       setErr(true);
     }
   };
@@ -62,7 +59,7 @@ const Register = () => {
             <img src={Add} alt="" /> <span>Add an Avatar</span>
           </label>
           <button>Sign up</button>
-          {err ? <span>Something went wrong!</span> : null}
+          {err ? <span className="error-msg">Something went wrong!</span> : null}
         </form>
         <p>
           Already have an account? <Link to="/login">Sign in</Link>
