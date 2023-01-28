@@ -157,7 +157,7 @@
   padding: 10px;
   cursor: pointer;
 }
-.userChat:hover{
+.userChat:hover, .selectedUserChat{
   background-color: var(--transparentGray);
 }
 .userChat>img{
