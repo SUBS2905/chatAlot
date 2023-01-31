@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { sendEmailVerification, signOut } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
 import { auth } from "../firebase";
@@ -9,6 +9,20 @@ const VerifyEmail = () => {
   const [err, setErr] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(currentUser){
+      if(currentUser.emailVerified){
+        navigate("/");
+      }
+      else{
+        navigate("/verify");
+      }
+    }
+    else{
+      navigate("/login");
+    }
+  },[currentUser, navigate]);
 
   const handleSend = async (e) => {
     try {
