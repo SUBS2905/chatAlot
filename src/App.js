@@ -6,12 +6,14 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
   const ProtectedRoute = ({ children }) => {
     if (!currentUser)
-      return <Navigate to="/login"/>;
+      return <Navigate to="/login" />;
+
     return children;
   };
 
@@ -30,6 +32,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="forgotPassword" element={<ForgotPassword />} />
+          <Route path="verify" element={<VerifyEmail />} />
         </Route>
       </Routes>
     </BrowserRouter>
