@@ -19,12 +19,19 @@ const Register = () => {
 
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
+      let downloadURL = "";
 
-      const storageRef = ref(storage, displayName);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+      if(!file){
+        const gsReference = ref(storage, 'gs://chat-a-lot-1d327.appspot.com/defaultUserPFP.jpg');
+        downloadURL = await getDownloadURL(gsReference);
+      }
+      else{
+        const storageRef = ref(storage, displayName);
+        const uploadTask = uploadBytesResumable(storageRef, file);
 
-      const uploadSnapshot = await uploadTask;
-      const downloadURL = await getDownloadURL(uploadSnapshot.ref);
+        const uploadSnapshot = await uploadTask;
+        downloadURL = await getDownloadURL(uploadSnapshot.ref);
+      }
 
       await updateProfile(user, {
         displayName,
