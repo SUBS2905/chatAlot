@@ -4,13 +4,17 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Messages from './Messages';
 import Input from './Input'
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
 import { ChatContext } from '../context/ChatContext';
+import { confirmAlert } from 'react-confirm-alert';
+import options from './ModalOptions';
 
 const Chat = () => {
 
   const {data} = useContext(ChatContext);
+
+  const handleLogout = () =>{
+    confirmAlert(options);
+  }
 
   return (
     <div className='chat'>
@@ -19,7 +23,7 @@ const Chat = () => {
         <div className='chatIcons'>
           <VideocamIcon />
           <PersonAddIcon />
-          <button id='logout' onClick={()=>signOut(auth)}><LogoutIcon style={{color:'red'}} /></button>
+          <button id='logout' onClick={handleLogout}><LogoutIcon style={{color:'red'}} /></button>
         </div>
       </div>
       <Messages />

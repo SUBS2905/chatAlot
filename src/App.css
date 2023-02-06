@@ -15,6 +15,7 @@
   --deepBlue: #25185d;
   --deepBlue2: #372e63;
   --sentMessage: #0072ff;
+  --goodRed: #d7403a;
 }
 
 /* Register & Login page */
@@ -134,6 +135,7 @@
   width: 32px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
 }
 .search{
   border-bottom: 1px solid var(--Gray);
@@ -201,6 +203,47 @@
   outline: none;
   cursor: pointer;
 }
+.dialogOverlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--transparentBlack);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dialogBox{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--transparentWhite);
+  overflow: hidden;
+}
+#react-confirm-alert-firm-svg {
+  display: none;
+}
+.optButtons{
+  display: flex;
+  gap: 20px;
+}
+.optButtons button{
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.optButtons button:nth-child(1){
+  background-color: var(--goodRed);
+  color: white;
+}
+
 .messages{
   background-color: var(--solidGray);
   padding: 10px;
