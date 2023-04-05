@@ -7,9 +7,11 @@ import Input from './Input'
 import { ChatContext } from '../context/ChatContext';
 import { confirmAlert } from 'react-confirm-alert';
 import options from './ModalOptions';
+import { useNavigate } from 'react-router-dom';
 
 const Chat = () => {
 
+  const navigate = useNavigate();
   const {data} = useContext(ChatContext);
 
   const handleLogout = () =>{
@@ -21,7 +23,7 @@ const Chat = () => {
       <div className='chatInfo'>
         <span>{data.user?.displayName}</span>
         <div className='chatIcons'>
-          <VideocamIcon />
+          <VideocamIcon onClick={()=>{navigate("/videocall")}}/>
           <PersonAddIcon />
           <button id='logout' onClick={handleLogout}><LogoutIcon style={{color:'red'}} /></button>
         </div>

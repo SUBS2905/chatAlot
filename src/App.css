@@ -343,6 +343,50 @@
   right: 250px;
 }
 
+/* Videocall */
+.vc-container{
+  background-image: url(assets/container-bg.jpg);
+  background-size: cover;
+  height: 100vh;
+}
+.vc-windows{
+  display: flex;
+  height: 90%;
+  justify-content: center;
+  gap: 20px;
+}
+.incoming-window{
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  color: var(--White);
+  margin: 20px 0;
+  border-radius: 1.5%;
+  background-color: var(--transparentBlack);
+  backdrop-filter: blur(1.5px);
+}
+.outgoing-window{
+  border: 2px solid green;
+  width: 150px;
+  height: 100px;
+  border-radius: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.vc-buttons{
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  height: 7%;
+  width: 10%;
+  color: white;
+  background-color: #d7403a;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 480px) {
   
 }

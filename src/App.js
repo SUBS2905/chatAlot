@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import VerifyEmail from "./pages/VerifyEmail";
+import Videocall from "./pages/Videocall";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -33,6 +34,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="forgotPassword" element={<ForgotPassword />} />
           <Route path="verify" element={<VerifyEmail />} />
+          <Route path="videocall" element={<Videocall />} />
         </Route>
       </Routes>
     </BrowserRouter>
