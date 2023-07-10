@@ -2,12 +2,20 @@ import React, { useState } from "react";
 import Add from "../assets/user-add.png";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { auth, storage, db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [err, setErr] = useState(false);
+  const [err, setErr] = useState("");
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -17,15 +25,35 @@ const Register = () => {
     const password = e.target[2].value;
     const file = e.target[3].files[0];
 
+    const qry = query(
+      collection(db, "users"),
+      where("displayName", "==", displayName)
+    );
     try {
-      const { user } = await createUserWithEmailAndPassword(auth, email, password);
+      const querySnapshot = await getDocs(qry);
+      querySnapshot.forEach((doc) => {
+        setUser(doc.data());
+        console.log(user);
+      });
+    } catch (err) {
+      setErr("cant query");
+    }
+
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       let downloadURL = "";
 
-      if(!file){
-        const gsReference = ref(storage, 'gs://chat-a-lot-1d327.appspot.com/defaultUserPFP.jpg');
+      if (!file) {
+        const gsReference = ref(
+          storage,
+          "gs://chat-a-lot-1d327.appspot.com/defaultUserPFP.jpg"
+        );
         downloadURL = await getDownloadURL(gsReference);
-      }
-      else{
+      } else {
         const storageRef = ref(storage, displayName);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -48,7 +76,7 @@ const Register = () => {
       await setDoc(doc(db, "userChats", user.uid), {});
       navigate("/");
     } catch {
-      setErr(true);
+      setErr("Check email address and/or password");
     }
   };
 
@@ -66,7 +94,7 @@ const Register = () => {
             <img src={Add} alt="" /> <span>Add an Avatar</span>
           </label>
           <button>Sign up</button>
-          {err ? <span className="error-msg">Something went wrong!</span> : null}
+          {err && <span className="error-msg">{err}</span>}
         </form>
         <p>
           Already have an account? <Link to="/login">Sign in</Link>
