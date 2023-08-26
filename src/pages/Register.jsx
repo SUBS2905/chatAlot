@@ -15,7 +15,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [err, setErr] = useState("");
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -25,58 +24,57 @@ const Register = () => {
     const password = e.target[2].value;
     const file = e.target[3].files[0];
 
-    const qry = query(
-      collection(db, "users"),
-      where("displayName", "==", displayName)
-    );
     try {
-      const querySnapshot = await getDocs(qry);
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data());
-        console.log(user);
-      });
-    } catch (err) {
-      setErr("cant query");
-    }
-
-    try {
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
+      const qry = query(
+        collection(db, "users"),
+        where("displayName", "==", displayName)
       );
-      let downloadURL = "";
-
-      if (!file) {
-        const gsReference = ref(
-          storage,
-          "gs://chat-a-lot-1d327.appspot.com/defaultUserPFP.jpg"
-        );
-        downloadURL = await getDownloadURL(gsReference);
+      const querySnapshot = await getDocs(qry);
+      if (!querySnapshot.empty) {
+        setErr("This username is already taken.");
+        setTimeout(()=>{
+          setErr("");
+        }, 3000)
       } else {
-        const storageRef = ref(storage, displayName);
-        const uploadTask = uploadBytesResumable(storageRef, file);
+        const { user } = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        let downloadURL = "";
 
-        const uploadSnapshot = await uploadTask;
-        downloadURL = await getDownloadURL(uploadSnapshot.ref);
+        if (!file) {
+          const gsReference = ref(
+            storage,
+            "gs://chat-a-lot-1d327.appspot.com/defaultUserPFP.jpg"
+          );
+          downloadURL = await getDownloadURL(gsReference);
+        } else {
+          const storageRef = ref(storage, displayName);
+          const uploadTask = uploadBytesResumable(storageRef, file);
+
+          const uploadSnapshot = await uploadTask;
+          downloadURL = await getDownloadURL(uploadSnapshot.ref);
+        }
+
+        await updateProfile(user, {
+          displayName,
+          photoURL: downloadURL,
+        });
+
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          displayName,
+          email,
+          photoURL: downloadURL,
+        });
+
+        await setDoc(doc(db, "userChats", user.uid), {});
+        navigate("/");
       }
-
-      await updateProfile(user, {
-        displayName,
-        photoURL: downloadURL,
-      });
-
-      await setDoc(doc(db, "users", user.uid), {
-        uid: user.uid,
-        displayName,
-        email,
-        photoURL: downloadURL,
-      });
-
-      await setDoc(doc(db, "userChats", user.uid), {});
-      navigate("/");
-    } catch {
-      setErr("Check email address and/or password");
+    } catch(e) {
+      console.error(e);
+      setErr("Something went wrong!");
     }
   };
 
