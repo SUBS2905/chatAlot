@@ -9,7 +9,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const email = e.target[0].value;
+    const email = e.target[0].value.trim();
     const password = e.target[1].value;
 
     try {
